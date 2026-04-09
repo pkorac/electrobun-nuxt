@@ -5,4 +5,9 @@ export default defineNuxtConfig({
 	modules: ["@nuxt/ui"],
 	css: ["~/assets/main.css"],
 	ssr: false,
+	router: {
+		options: {
+			hashMode: true,
+		},
+	},
 });

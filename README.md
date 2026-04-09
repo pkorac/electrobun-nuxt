@@ -112,6 +112,8 @@ The Electrobun main process (`src/bun/index.ts`) creates a `BrowserWindow` and d
 - **Dev channel** — if a Nuxt dev server is running on port 3000 it loads `http://localhost:3000` for HMR; otherwise it falls back to the static files.
 - **Stable / production** — it always loads `views://mainview/index.html`, which points to the generated static site bundled inside the app.
 
+Nuxt runs in hash-history mode in this project so the desktop shell can load `views://mainview/index.html` without the SPA router interpreting `/index.html` as an application route.
+
 The `electrobun.config.ts` maps `.output/public` → `views/mainview` so that Nuxt's generated output is automatically included in the desktop build.
 
 ## Scripts Reference
