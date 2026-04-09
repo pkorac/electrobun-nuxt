@@ -1,7 +1,9 @@
 {
-	"name": "nuxt-starter-basic",
+	"name": "electrobun-nuxt-example",
 	"version": "0.1.0",
 	"type": "module",
+	"description": "Basic Nuxt + Electrobun example",
+	"author": "Peter Koraca",
 	"private": true,
 	"scripts": {
 		"build": "nuxt build",

@@ -1,6 +1,7 @@
 ---
 name: nuxt-vue-design-engineer
 description: Design, build and refactor Nuxt 4 + Vue 3.5 + NuxtUI v4 applications with consistent design-engineering conventions. Use when working in Nuxt/NuxtUI Vue codebases to enforce stack defaults, Bun commands, semantic color tokens, NuxtUI-first component choices, and SFC/composable conventions.
+author: Peter Koraca
 ---
 
 # Nuxt Vue Design Engineer

@@ -1,8 +1,15 @@
-# Nuxt Basic Starter
+# Electrobun + Nuxt Basic Example
 
 by Peter Koraca
 
-A minimal [Nuxt 4](https://nuxt.com) starter app with [Nuxt UI v4](https://ui.nuxt.com), [Tailwind CSS v4](https://tailwindcss.com), and TypeScript.
+A minimal desktop application built with [Electrobun](https://electrobun.dev), [Nuxt 4](https://nuxt.com), [Nuxt UI v4](https://ui.nuxt.com), [Tailwind CSS v4](https://tailwindcss.com), and TypeScript.
+
+## Prerequisites
+
+- [Bun](https://bun.sh) (latest)
+- macOS, Linux, or Windows (see [Electrobun platform support](https://electrobun.dev))
+
+---
 
 ## Setup
 
@@ -12,59 +19,120 @@ Install dependencies:
 bun install
 ```
 
+This also runs `nuxt prepare` automatically via the `postinstall` hook.
+
+---
+
 ## Development
 
-Start the development server on `http://localhost:3000`:
+### Web only
+
+Start the Nuxt development server on `http://localhost:3000`:
 
 ```bash
 bun run dev
 ```
 
-Run the desktop shell against a generated static build:
+### Desktop (static build)
+
+Generate a static site and launch the Electrobun desktop shell with file watching:
 
 ```bash
 bun run dev:desktop
 ```
 
-Run the desktop shell with Nuxt HMR:
+This runs `nuxt generate` first, then opens the app via `electrobun dev --watch`. The desktop window loads the static files from `views://mainview/index.html`.
+
+### Desktop HMR (Hot Module Reload)
+
+Run the Nuxt dev server and the Electrobun desktop shell side-by-side for live reloading:
 
 ```bash
 bun run dev:desktop:hmr
 ```
 
-This uses the same pattern as the ElectroBun Vue example:
+This uses `concurrently` to start both `bun run dev` and `bun run dev:desktop` in parallel. In dev mode the Electrobun process detects the running Nuxt server and loads `http://localhost:3000` instead of the static files, giving you full hot-module replacement in the desktop window.
 
-- in development, the desktop window loads `http://localhost:3000` when the Nuxt dev server is available
-- otherwise it falls back to the generated static files copied into ElectroBun's `views://mainview`
+---
 
 ## Production
 
-Build the application for production:
+### Build (dynamic – web)
+
+Build the Nuxt application for hosting on a server/serverless. If you turn ssr on, you get server side rendering.
 
 ```bash
 bun run build
 ```
 
-Preview the production build locally:
+### Generate (static - web)
 
-```bash
-bun run preview
-```
-
-Generate a static site:
+Generate a fully static site to `.output/public`:
 
 ```bash
 bun run generate
 ```
 
-Build the desktop application bundle:
+### Build Electrobun desktop application
+
+Generate the static site and package it into an Electrobun application bundle:
 
 ```bash
 bun run build:desktop
 ```
 
+This runs `nuxt generate` followed by `electrobun build --env=stable`. The Electrobun config copies `.output/public` into the `views/mainview` directory inside the app bundle.
+
+---
+
+## Project Structure
+
+```
+├── app/                    # Nuxt application source
+│   ├── assets/             #   CSS and static assets
+│   ├── pages/              #   File-based routing pages
+│   ├── app.vue             #   Root Vue component
+│   └── app.config.ts       #   Nuxt UI / app-level config
+├── src/
+│   └── bun/
+│       └── index.ts        # Electrobun main process entry point
+├── public/                 # Nuxt public assets (served as-is)
+├── electrobun.config.ts    # Electrobun build & app configuration
+├── nuxt.config.ts          # Nuxt configuration
+├── package.json
+└── tsconfig.json
+```
+
+---
+
+## How It Works
+
+The Electrobun main process (`src/bun/index.ts`) creates a `BrowserWindow` and decides which URL to load:
+
+- **Dev channel** — if a Nuxt dev server is running on port 3000 it loads `http://localhost:3000` for HMR; otherwise it falls back to the static files.
+- **Stable / production** — it always loads `views://mainview/index.html`, which points to the generated static site bundled inside the app.
+
+The `electrobun.config.ts` maps `.output/public` → `views/mainview` so that Nuxt's generated output is automatically included in the desktop build.
+
+## Scripts Reference
+
+| Script                    | Description                                          |
+| ------------------------- | ---------------------------------------------------- |
+| `bun run dev`             | Start Nuxt dev server at `localhost:3000`            |
+| `bun run dev:desktop`     | Generate static site + launch Electrobun in dev mode |
+| `bun run dev:desktop:hmr` | Run Nuxt dev server + Electrobun together (HMR)      |
+| `bun run build`           | Build Nuxt for SSR production                        |
+| `bun run preview`         | Preview the SSR production build                     |
+| `bun run generate`        | Generate a static site to `.output/public`           |
+| `bun run build:desktop`   | Generate static site + build Electrobun app bundle   |
+
 ## Learn More
 
+- [Electrobun Documentation](https://electrobun.dev)
 - [Nuxt Documentation](https://nuxt.com/docs/getting-started/introduction)
 - [Nuxt UI Documentation](https://ui.nuxt.com)
-- [Deployment Guide](https://nuxt.com/docs/getting-started/deployment)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Bun Documentation](https://bun.sh/docs)
+
+Have fun,
+Peter Koraca
