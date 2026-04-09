@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+html,
+body,
+#__nuxt {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* Helper flex classes */
+.flex-h-2 {
+	@apply flex items-center gap-2;
+}
+
+.flex-h-4 {
+	@apply flex items-center gap-4;
+}
+
+.pd-x {
+	@apply px-4;
+}
+
+.pd-y {
+	@apply py-4;
+}
+
+.flex-h-6 {
+	@apply flex items-center gap-6;
+}
+
+.flex-h-12 {
+	@apply flex items-center gap-12;
+}
+
+.flex-h-between {
+	@apply flex items-center justify-between gap-4;
+}
+
+.flex-v-2 {
+	@apply flex flex-col gap-2;
+}
+
+.flex-v-3 {
+	@apply flex flex-col gap-3;
+}
+
+.flex-v-4 {
+	@apply flex flex-col gap-4;
+}
+
+.flex-v-6 {
+	@apply flex flex-col gap-6;
+}
+
+.flex-v-12 {
+	@apply flex flex-col gap-12;
+}
+.flex-v-16 {
+	@apply flex flex-col gap-16;
+}
+.flex-v-18 {
+	@apply flex flex-col gap-18;
+}
+.flex-v-24 {
+	@apply flex flex-col gap-24;
+}
+
+.flex-between {
+	@apply flex items-center justify-between;
+}
+
+.flex-centre {
+	@apply flex items-center justify-center;
+}
+
+.container {
+	@apply w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto;
+}
+
+.link {
+	@apply hover:underline;
+}
+
+/* Default Fade Transitions */
+.v-enter-active,
+.v-leave-active {
+	transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+	opacity: 0;
+}
+
+.fade-from-right-enter-active,
+.fade-from-right-leave-active {
+	transition: opacity 0.2s ease-in-out;
+}
+
+.fade-from-right-enter-from,
+.fade-from-right-leave-to {
+	opacity: 0;
+	transform: translateX(5px);
+}
+
+/* Scale Fade */
+.scale-fade-enter-active,
+.scale-fade-leave-active {
+	transition: all 0.3s ease;
+}
+
+.scale-fade-enter-from,
+.scale-fade-leave-to {
+	opacity: 0;
+	transform: scale(0.5);
+}
