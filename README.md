@@ -1,4 +1,4 @@
-# Electrobun + Nuxt Basic Example
+# ElectroNuxt
 
 by Peter Koraca
 
